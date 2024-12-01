@@ -32,6 +32,7 @@ class TEMflHoS {
         ModuleManager.register(CrashPatchModule)
         ModuleManager.register(SafeInteractModule)
         ModuleManager.register(PacketLoggerModule)
+        ModuleManager.register(FullBrightModule)
 
         ListenerManager.register(ModuleManager)
         ListenerManager.register(PacketEventHandler)
