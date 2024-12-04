@@ -17,7 +17,7 @@ object BetterTooltipsModule : Module("better_tooltips", "Better tooltips") {
     fun editTooltip(e: ItemTooltipEvent) {
         if (show_sb_id.value && e.showAdvancedItemTooltips) {
             val sbId = e.itemStack?.tagCompound?.getCompoundTag("ExtraAttributes")?.getString("id")
-            if (sbId != null) {
+            if (!sbId.isNullOrEmpty()) {
                 var found = false
                 for (i in e.toolTip.lastIndex downTo 0) {
                     if (!e.toolTip[i].startsWith("${EnumChatFormatting.DARK_GRAY}minecraft:")) continue
