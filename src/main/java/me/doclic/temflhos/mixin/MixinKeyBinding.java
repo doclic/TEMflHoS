@@ -1,6 +1,7 @@
 package me.doclic.temflhos.mixin;
 
-import me.doclic.temflhos.module.ModuleManager;
+import me.doclic.temflhos.event.KeyboardEvent;
+import me.doclic.temflhos.event.ListenerManager;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,16 +27,8 @@ public abstract class MixinKeyBinding {
             ByteBuffer readBuffer = (ByteBuffer) readBufferField.get(null);
             readBuffer.mark();
             while (Keyboard.next()) {
-                if(!Keyboard.getEventKeyState()) continue;
-                if(!Keyboard.isKeyDown(Keyboard.KEY_RMENU)) continue; // KEY_RMENU is right alt
-
-                ModuleManager.INSTANCE.getRegistry().forEach((id, module) -> {
-                    if(module.getKey().getValue() == Keyboard.getEventKey()) {
-                        boolean old = module.getEnabled().getValue();
-                        module.getEnabled().setValue(!old);
-                        if (old != module.getEnabled().getValue()) module.sendStateUpdateMsg(); //If it wasnt cancelled
-                    }
-                });
+                final KeyboardEvent e = new KeyboardEvent(Keyboard.getEventKey(), Keyboard.getEventKeyState());
+                ListenerManager.INSTANCE.getRegistry().forEach(listener -> listener.onKeyboard(e));
             }
             readBuffer.reset();
         } catch (NoSuchFieldException | IllegalAccessException e) {
