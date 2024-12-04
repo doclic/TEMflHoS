@@ -34,6 +34,7 @@ class TEMflHoS {
         ModuleManager.register(PacketLoggerModule)
         ModuleManager.register(FullBrightModule)
         ModuleManager.register(IdViewerModule)
+        ModuleManager.register(SuggestCommandsModule)
 
         ListenerManager.register(ModuleManager)
         ListenerManager.register(PacketEventHandler)
