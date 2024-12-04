@@ -12,6 +12,7 @@
     "crashpatch.MixinBlockNewLog"
   ],
   "client": [
-    "MixinGuiContainer"
+    "MixinGuiContainer",
+    "MixinRenderItem"
   ]
 }

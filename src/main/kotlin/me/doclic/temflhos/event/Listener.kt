@@ -5,4 +5,5 @@ interface Listener {
     fun onS2CPacket(e: S2CPacketEvent) { }
 
     fun onSplashText(e: SplashTextEvent) { }
+    fun onRenderItemOverlayPostEvent(e: RenderItemOverlayPostEvent) { }
 }
