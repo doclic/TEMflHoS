@@ -33,7 +33,7 @@ class TEMflHoS {
         ModuleManager.register(SafeInteractModule)
         ModuleManager.register(PacketLoggerModule)
         ModuleManager.register(FullBrightModule)
-        ModuleManager.register(IdViewerModule)
+        ModuleManager.register(BetterTooltipsModule)
         ModuleManager.register(SuggestCommandsModule)
 
         ListenerManager.register(ModuleManager)
