@@ -13,12 +13,11 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
 
-@Mod(name = TEMflHoS.NAME, modid = TEMflHoS.MODID, version = TEMflHoS.VERSION, clientSideOnly = true, acceptedMinecraftVersions = "1.8.9")
+@Mod(name = TEMflHoS.NAME, modid = TEMflHoS.MODID, clientSideOnly = true, acceptedMinecraftVersions = "1.8.9")
 class TEMflHoS : Listener {
     companion object {
         const val NAME = "TEMflHoS"
         const val MODID = "temflhos"
-        const val VERSION = "1.0"
     }
 
     @EventHandler
