@@ -14,7 +14,6 @@ import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement
 import net.minecraft.util.EnumChatFormatting
 import org.lwjgl.input.Keyboard
 
-
 object SafeInteractModule : Module("safe_interact", "Safe Interact", keyCode = Keyboard.KEY_I, resetOnDisconnect = false) {
     @EventHandler
     fun onC2SPacket(e: C2SPacketEvent) {

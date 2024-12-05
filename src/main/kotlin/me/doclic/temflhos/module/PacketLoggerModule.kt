@@ -1,6 +1,9 @@
 package me.doclic.temflhos.module
 
-import me.doclic.temflhos.config.*
+import me.doclic.temflhos.config.BooleanConfigType
+import me.doclic.temflhos.config.ConfigNode
+import me.doclic.temflhos.config.ListConfigType
+import me.doclic.temflhos.config.StringConfigType
 import me.doclic.temflhos.event.C2SPacketEvent
 import me.doclic.temflhos.event.EventHandler
 import me.doclic.temflhos.event.S2CPacketEvent

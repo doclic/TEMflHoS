@@ -2,7 +2,8 @@ package me.doclic.temflhos.module
 
 import me.doclic.temflhos.config.BooleanConfigType
 import me.doclic.temflhos.config.ConfigNode
-import me.doclic.temflhos.util.*
+import me.doclic.temflhos.util.mc
+import me.doclic.temflhos.util.tChat
 import net.minecraft.client.gui.GuiScreen
 import net.minecraft.util.EnumChatFormatting
 import org.lwjgl.input.Keyboard

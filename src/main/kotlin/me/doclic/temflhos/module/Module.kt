@@ -1,6 +1,9 @@
 package me.doclic.temflhos.module
 
-import me.doclic.temflhos.config.*
+import me.doclic.temflhos.config.BooleanConfigType
+import me.doclic.temflhos.config.ConfigDir
+import me.doclic.temflhos.config.ConfigNode
+import me.doclic.temflhos.config.IntConfigType
 import me.doclic.temflhos.event.Listener
 import me.doclic.temflhos.event.ListenerManager
 import me.doclic.temflhos.util.localPlayer
@@ -32,7 +35,7 @@ abstract class Module(
             }
         })
     val key = ConfigNode("key", keyCode, IntConfigType, config)
-    open fun checkCancelled(enabling: Boolean ): Boolean = false
+    open fun checkCancelled(enabling: Boolean): Boolean = false
 
     open fun onEnable() { }
     open fun onDisable() { }

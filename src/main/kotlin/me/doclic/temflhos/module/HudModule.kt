@@ -21,7 +21,6 @@ object HudModule : Module("hud", "HUD") {
     private val paddingY = ConfigNode("padding_y", 2, IntConfigType, config)
     private val dropShadow = ConfigNode ("drop_shadow", true, BooleanConfigType, config)
 
-
     @SubscribeEvent
     fun render(event: RenderGameOverlayEvent.Text) {
         val activeModules = ModuleManager.registry.filter { entry -> entry.value.enabled.value }
@@ -39,7 +38,6 @@ object HudModule : Module("hud", "HUD") {
         else drawMultiLineString(activeModules.values.joinToString("\n") { module: Module -> module.name }, paddingX.value, paddingY.value, textColor, dropShadow.value)
     }
 
-
     private fun drawMultiLineString (str: String, x: Int, y: Int, color: Int, dropShadow: Boolean) {
         var offset: Float = y.toFloat()
         for (string in str.split("\n")) {
@@ -47,5 +45,4 @@ object HudModule : Module("hud", "HUD") {
             offset += mc.fontRendererObj.FONT_HEIGHT
         }
     }
-
 }
