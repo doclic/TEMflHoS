@@ -16,7 +16,8 @@ public abstract class MixinGuiMainMenu {
     @Inject(method = "<init>", at = @At("RETURN"), remap = false)
     private void init(CallbackInfo ci) {
         final SplashTextEvent e = new SplashTextEvent(splashText);
-        ListenerManager.INSTANCE.getRegistry().forEach(listener -> listener.onSplashText(e));
+        ListenerManager.INSTANCE.queue(e);
+        ListenerManager.INSTANCE.waitForDispatch();
         splashText = e.getSplashText();
     }
 }

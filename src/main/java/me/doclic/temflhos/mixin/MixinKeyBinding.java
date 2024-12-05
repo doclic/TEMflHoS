@@ -28,7 +28,7 @@ public abstract class MixinKeyBinding {
             readBuffer.mark();
             while (Keyboard.next()) {
                 final KeyboardEvent e = new KeyboardEvent(Keyboard.getEventKey(), Keyboard.getEventKeyState());
-                ListenerManager.INSTANCE.getRegistry().forEach(listener -> listener.onKeyboard(e));
+                ListenerManager.INSTANCE.queue(e);
             }
             readBuffer.reset();
         } catch (NoSuchFieldException | IllegalAccessException e) {

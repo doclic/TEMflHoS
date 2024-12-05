@@ -2,6 +2,7 @@ package me.doclic.temflhos.module
 
 import me.doclic.temflhos.config.*
 import me.doclic.temflhos.event.C2SPacketEvent
+import me.doclic.temflhos.event.EventHandler
 import me.doclic.temflhos.event.S2CPacketEvent
 import me.doclic.temflhos.util.C2SPacket
 import me.doclic.temflhos.util.PacketUtil
@@ -30,14 +31,16 @@ object PacketDisablerModule : Module("packet_disabler", "Packet Disabler", keyCo
         }
     }
 
-    override fun onC2SPacket(e: C2SPacketEvent) {
+    @EventHandler
+    fun onC2SPacket(e: C2SPacketEvent) {
         val inList = c2sPacketFilterList.value.any {p -> e.packet.javaClass.simpleName.lowercase().contains(p.lowercase())}
         if ((inList and c2sBlacklistMode.value) or (!inList and !c2sBlacklistMode.value)) return
         e.cancelled = true
         queuedC2SPackets.add(e.packet)
     }
 
-    override fun onS2CPacket(e: S2CPacketEvent) {
+    @EventHandler
+    fun onS2CPacket(e: S2CPacketEvent) {
         val inList = s2cPacketFilterList.value.any {p -> e.packet.javaClass.simpleName.lowercase().contains(p.lowercase())}
         if ((inList and s2cBlacklistMode.value) or (!inList and !s2cBlacklistMode.value)) return
         e.cancelled = true

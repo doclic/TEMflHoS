@@ -2,16 +2,19 @@ package me.doclic.temflhos
 
 import me.doclic.temflhos.command.*
 import me.doclic.temflhos.config.ConfigIO
+import me.doclic.temflhos.event.Listener
 import me.doclic.temflhos.event.ListenerManager
-import me.doclic.temflhos.event.handler.PacketEventHandler
+import me.doclic.temflhos.event.dispatcher.PacketEventDispatcher
 import me.doclic.temflhos.module.*
 import net.minecraftforge.client.ClientCommandHandler
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.Mod.EventHandler
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import net.minecraftforge.fml.common.gameevent.TickEvent
 
 @Mod(name = TEMflHoS.NAME, modid = TEMflHoS.MODID, version = TEMflHoS.VERSION, clientSideOnly = true, acceptedMinecraftVersions = "1.8.9")
-class TEMflHoS {
+class TEMflHoS : Listener {
     companion object {
         const val NAME = "TEMflHoS"
         const val MODID = "temflhos"
@@ -36,9 +39,15 @@ class TEMflHoS {
         ModuleManager.register(BetterTooltipsModule)
         ModuleManager.register(SuggestCommandsModule)
 
+        ListenerManager.register(this)
         ListenerManager.register(ModuleManager)
-        ListenerManager.register(PacketEventHandler)
+        ListenerManager.register(PacketEventDispatcher)
 
         ConfigIO.reloadConfig()
+    }
+
+    @SubscribeEvent
+    fun onTick(e: TickEvent) {
+        ListenerManager.dispatchQueue()
     }
 }

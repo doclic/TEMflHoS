@@ -1,6 +1,7 @@
 package me.doclic.temflhos.module
 
 import me.doclic.temflhos.event.C2SPacketEvent
+import me.doclic.temflhos.event.EventHandler
 import me.doclic.temflhos.util.localPlayer
 import me.doclic.temflhos.util.tChat
 import net.minecraft.block.Block
@@ -15,7 +16,8 @@ import org.lwjgl.input.Keyboard
 
 
 object SafeInteractModule : Module("safe_interact", "Safe Interact", keyCode = Keyboard.KEY_I, resetOnDisconnect = false) {
-    override fun onC2SPacket(e: C2SPacketEvent) {
+    @EventHandler
+    fun onC2SPacket(e: C2SPacketEvent) {
         preventDragonEggInteract(e)
         safePlace(e)
     }

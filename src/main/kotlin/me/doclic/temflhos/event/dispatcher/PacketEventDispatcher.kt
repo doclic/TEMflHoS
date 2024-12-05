@@ -1,4 +1,4 @@
-package me.doclic.temflhos.event.handler
+package me.doclic.temflhos.event.dispatcher
 
 import io.netty.channel.ChannelDuplexHandler
 import io.netty.channel.ChannelHandlerContext
@@ -13,7 +13,7 @@ import me.doclic.temflhos.util.S2CPacket
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.network.FMLNetworkEvent
 
-object PacketEventHandler : Listener {
+object PacketEventDispatcher : Listener {
     @SubscribeEvent
     @Suppress("UNCHECKED_CAST")
     fun onClientConnected(e: FMLNetworkEvent.ClientConnectedToServerEvent) {
@@ -23,14 +23,16 @@ object PacketEventHandler : Listener {
             object : ChannelDuplexHandler() {
                 override fun write(ctx: ChannelHandlerContext?, msg: Any?, promise: ChannelPromise?) {
                     val packetEvent = C2SPacketEvent(msg as C2SPacket)
-                    ListenerManager.registry.forEach { listener -> listener.onC2SPacket(packetEvent) }
+                    ListenerManager.queue(packetEvent)
+                    ListenerManager.waitForDispatch()
 
                     if(!packetEvent.cancelled) super.write(ctx, packetEvent.packet, promise)
                 }
 
                 override fun channelRead(ctx: ChannelHandlerContext?, msg: Any?) {
                     val packetEvent = S2CPacketEvent(msg as S2CPacket)
-                    ListenerManager.registry.forEach { listener -> listener.onS2CPacket(packetEvent) }
+                    ListenerManager.queue(packetEvent)
+                    ListenerManager.waitForDispatch()
 
                     if(!packetEvent.cancelled) super.channelRead(ctx, packetEvent.packet)
                 }

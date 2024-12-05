@@ -1,5 +1,6 @@
 package me.doclic.temflhos.module
 
+import me.doclic.temflhos.event.EventHandler
 import me.doclic.temflhos.event.KeyboardEvent
 import me.doclic.temflhos.event.Listener
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -25,7 +26,8 @@ object ModuleManager : Listener {
                 module.enabled.value = module.enabledByDefault
     }
 
-    override fun onKeyboard(e: KeyboardEvent) {
+    @EventHandler
+    fun onKeyboard(e: KeyboardEvent) {
         if (!e.down) return
         if (!Keyboard.isKeyDown(Keyboard.KEY_RMENU)) return
         for (module in writableRegistry.values) {
