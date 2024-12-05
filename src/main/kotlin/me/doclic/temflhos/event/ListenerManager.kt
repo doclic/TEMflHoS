@@ -51,7 +51,8 @@ object ListenerManager {
         waitingForDispatch.set(true)
         while (waitingForDispatch.get()) {}
     }
-    private fun dispatch(e: Event) {
+    fun dispatch(e: Event) {
+        assert(mc.isCallingFromMinecraftThread)
         // we copy in case event handlers register/unregister listeners
         for (listener in HashMap<Listener, Set<Method>>(writableRegistry)) {
             for (method in listener.value) {
