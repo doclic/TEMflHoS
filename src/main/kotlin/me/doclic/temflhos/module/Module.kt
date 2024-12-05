@@ -39,6 +39,6 @@ abstract class Module(
 
     open fun sendStateUpdateMsg() {
         tChat("${if (enabled.value) "Enabled" else "Disabled"} module $name")
-        localPlayer.playSound("random.click", 1f, 1.1f)
+        localPlayer?.playSound("random.click", 1f, 1.1f)
     }
 }

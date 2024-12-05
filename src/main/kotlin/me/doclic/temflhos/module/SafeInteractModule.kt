@@ -22,9 +22,9 @@ object SafeInteractModule : Module("safe_interact", "Safe Interact", keyCode = K
     private fun preventDragonEggInteract(e: C2SPacketEvent) {
         if (!listOf(C07PacketPlayerDigging::class, C08PacketPlayerBlockPlacement::class).contains(e.packet::class)) return
         val material: Material = if (e.packet is C07PacketPlayerDigging) {
-            localPlayer.entityWorld.getBlockState((e.packet as C07PacketPlayerDigging).position).block.material
+            localPlayer!!.entityWorld.getBlockState((e.packet as C07PacketPlayerDigging).position).block.material
         } else
-            localPlayer.entityWorld.getBlockState((e.packet as C08PacketPlayerBlockPlacement).position).block.material
+            localPlayer!!.entityWorld.getBlockState((e.packet as C08PacketPlayerBlockPlacement).position).block.material
         if (material != Material.dragonEgg) return
         tChat("${EnumChatFormatting.GREEN}Safe interact prevented you from teleporting that block")
         e.cancelled = true
@@ -53,7 +53,7 @@ object SafeInteractModule : Module("safe_interact", "Safe Interact", keyCode = K
     }
 
     private fun refreshInventory(item: ItemStack){
-        localPlayer.inventory.setInventorySlotContents(localPlayer.inventory.currentItem, item)
+        localPlayer!!.inventory.setInventorySlotContents(localPlayer!!.inventory.currentItem, item)
     }
 
 
