@@ -19,6 +19,10 @@ object ModuleManager : Listener {
     val registry: Map<String, Module>
         get() = Collections.unmodifiableMap(writableRegistry)
 
+    fun isEnabled(module: String): Boolean {
+        return (registry.keys.contains(module) && registry[module]!!.enabled.value)
+    }
+
     @SubscribeEvent
     fun onClientDisconnected(e: FMLNetworkEvent.ClientDisconnectionFromServerEvent) {
         for (module in writableRegistry.values)

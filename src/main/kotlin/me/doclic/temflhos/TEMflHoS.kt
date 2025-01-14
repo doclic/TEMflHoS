@@ -52,6 +52,7 @@ class TEMflHoS : Listener {
         ModuleManager.register(FullBrightModule)
         ModuleManager.register(BetterTooltipsModule)
         ModuleManager.register(SuggestCommandsModule)
+        ModuleManager.register(DvPreviewModule)
 
         ListenerManager.register(this)
         ListenerManager.register(ModuleManager)
