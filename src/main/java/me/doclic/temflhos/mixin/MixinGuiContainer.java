@@ -15,7 +15,7 @@ public abstract class MixinGuiContainer {
     @Inject(at = @At("HEAD"), method = "handleMouseClick", cancellable = true)
     public void handleMouseClick(Slot slotIn, int slotId, int clickedButton, int clickType, CallbackInfo ci) {
         if (slotIn == null || slotIn.getStack() == null) return;
-        if (!ModuleManager.INSTANCE.getRegistry().get("ghost_item").getEnabled().getValue()) return;
+        if (!ModuleManager.INSTANCE.isEnabled("ghost_item")) return;
         ci.cancel();
         ItemStack clickedItem = slotIn.getStack();
         Minecraft.getMinecraft().thePlayer.inventory.addItemStackToInventory(clickedItem);

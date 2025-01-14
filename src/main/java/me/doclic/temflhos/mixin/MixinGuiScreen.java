@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class MixinGuiScreen {
     @Inject(at = @At("HEAD"), method = "handleComponentClick")
     public void handleComponentClick(IChatComponent component, CallbackInfoReturnable<Boolean> cir) {
-        if (!ModuleManager.INSTANCE.getRegistry().get("suggest_commands").getEnabled().getValue()) return;
+        if (!ModuleManager.INSTANCE.isEnabled("suggest_commands")) return;
         if (component == null) return;
         ChatStyle style = component.getChatStyle();
         if (style == null) return;

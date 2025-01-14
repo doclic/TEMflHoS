@@ -19,13 +19,13 @@ public class MixinBlockAnvil {
 
     @ModifyVariable(method = "getStateFromMeta", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     public int getStateFromMeta(int meta){
-        if (!ModuleManager.INSTANCE.getRegistry().get("crash_patch").getEnabled().getValue()) return meta;
+        if (!ModuleManager.INSTANCE.isEnabled("crash_patch")) return meta;
         if (!DAMAGE.getAllowedValues().contains((meta & 0xF) >> 2)) return 0;
         return meta;
     }
     @ModifyVariable(method = "onBlockPlaced", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     public int onBlockPlaced(int meta){
-        if (!ModuleManager.INSTANCE.getRegistry().get("crash_patch").getEnabled().getValue()) return meta;
+        if (!ModuleManager.INSTANCE.isEnabled("crash_patch")) return meta;
         if (!DAMAGE.getAllowedValues().contains(meta >> 2)) {
             CommonFunctionsKt.tChat(EnumChatFormatting.GREEN + "Crashpatch prevented a crash!");
             return 0;

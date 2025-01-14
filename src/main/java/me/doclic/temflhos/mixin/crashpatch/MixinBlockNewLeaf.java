@@ -20,7 +20,7 @@ public class MixinBlockNewLeaf {
 
     @ModifyVariable(method = "getStateFromMeta", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     public int getStateFromMeta(int meta){
-        if (!ModuleManager.INSTANCE.getRegistry().get("crash_patch").getEnabled().getValue()) return meta;
+        if (!ModuleManager.INSTANCE.isEnabled("crash_patch")) return meta;
         if (!VARIANT.getAllowedValues().contains(BlockPlanks.EnumType.byMetadata((meta & 3) + 4))) {
             CommonFunctionsKt.tChat(EnumChatFormatting.GREEN + "Crashpatch prevented a crash!");
             return 0;

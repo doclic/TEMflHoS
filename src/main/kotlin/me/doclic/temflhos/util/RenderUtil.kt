@@ -3,18 +3,25 @@ package me.doclic.temflhos.util
 import me.doclic.temflhos.event.RenderItemOverlayPostEvent
 import net.minecraft.client.renderer.GlStateManager
 
-fun drawOverlay(e: RenderItemOverlayPostEvent) {
-    //TODO: finish
+fun drawOverlay(e: RenderItemOverlayPostEvent, xOffset: Float = 0f, yOffset: Float = 0f, color: Int = 0x00FFDD) {
     if (e.text.isEmpty()) return
     GlStateManager.disableLighting()
     GlStateManager.disableDepth()
     GlStateManager.disableBlend()
-    e.fr.drawStringWithShadow(
+    e.fontRenderer.drawStringWithShadow(
         e.text,
-        (e.xPosition + 17 - e.fr.getStringWidth(e.text)).toFloat(),
-        (e.yPosition + 9).toFloat(),
-        16777215
+        (e.xPosition + xOffset).toFloat(),
+        (e.yPosition + yOffset).toFloat(),
+        color
     )
     GlStateManager.enableLighting()
     GlStateManager.enableDepth()
+}
+
+/**
+ * if drawOverlay was so good
+ * why didn't they make drawOverlay2()
+ */
+fun drawOverlay2(e: RenderItemOverlayPostEvent) {
+    drawOverlay(e)
 }

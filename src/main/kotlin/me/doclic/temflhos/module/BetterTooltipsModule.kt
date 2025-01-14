@@ -2,6 +2,7 @@ package me.doclic.temflhos.module
 
 import me.doclic.temflhos.config.BooleanConfigType
 import me.doclic.temflhos.config.ConfigNode
+import me.doclic.temflhos.util.getFullSkyblockID
 import net.minecraft.util.EnumChatFormatting
 import net.minecraftforge.event.entity.player.ItemTooltipEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
@@ -16,7 +17,7 @@ object BetterTooltipsModule : Module("better_tooltips", "Better tooltips") {
     @SubscribeEvent
     fun editTooltip(e: ItemTooltipEvent) {
         if (show_sb_id.value && e.showAdvancedItemTooltips) {
-            val sbId = e.itemStack?.tagCompound?.getCompoundTag("ExtraAttributes")?.getString("id")
+            val sbId = getFullSkyblockID(e.itemStack)
             if (!sbId.isNullOrEmpty()) {
                 var found = false
                 for (i in e.toolTip.lastIndex downTo 0) {
