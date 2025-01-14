@@ -17,7 +17,8 @@ public abstract class MixinRenderItem {
     @Inject(at = @At("RETURN"), method = "renderItemOverlayIntoGUI")
     public void renderItemOverlayIntoGUI(FontRenderer fr, ItemStack stack, int xPosition, int yPosition, String text, CallbackInfo ci) {
         final RenderItemOverlayPostEvent e = new RenderItemOverlayPostEvent(fr, stack, xPosition, yPosition, "");
-        ListenerManager.INSTANCE.getRegistry().forEach(listener -> listener.onRenderItemOverlayPostEvent(e));
+        ListenerManager.INSTANCE.queue(e);
+        ListenerManager.INSTANCE.waitForDispatch();
         RenderUtilKt.drawOverlay(e);
     }
 }
