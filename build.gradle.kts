@@ -138,7 +138,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
             groupId = "me.doclic"
             artifactId = "temflhos"
-            version = "1.0.0"
+            version = project.version.toString()
 
             from(components["java"])
         }

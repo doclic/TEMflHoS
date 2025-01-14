@@ -1,7 +1,11 @@
 package me.doclic.temflhos.module
 
-import me.doclic.temflhos.config.*
+import me.doclic.temflhos.config.BooleanConfigType
+import me.doclic.temflhos.config.ConfigNode
+import me.doclic.temflhos.config.ListConfigType
+import me.doclic.temflhos.config.StringConfigType
 import me.doclic.temflhos.event.C2SPacketEvent
+import me.doclic.temflhos.event.EventHandler
 import me.doclic.temflhos.event.S2CPacketEvent
 import me.doclic.temflhos.util.tChat
 import net.minecraft.util.EnumChatFormatting
@@ -14,14 +18,16 @@ object PacketLoggerModule : Module("packet_logger", "Packet Logger", keyCode = K
     private val s2cPacketFilterList = ConfigNode("s2c_filter_list", emptyList(), ListConfigType(StringConfigType), config)
 
 
-    override fun onC2SPacket(e: C2SPacketEvent) {
+    @EventHandler
+    fun onC2SPacket(e: C2SPacketEvent) {
         if (!enableC2S.value) return
         if (c2sPacketFilterList.value.any { p -> e.packet.javaClass.simpleName.lowercase().contains(p.lowercase())}) return
 
         tChat("${EnumChatFormatting.GOLD}[C2S] ${e.packet.javaClass.simpleName}")
     }
 
-    override fun onS2CPacket(e: S2CPacketEvent) {
+    @EventHandler
+    fun onS2CPacket(e: S2CPacketEvent) {
         if (!enableS2C.value) return
         if (s2cPacketFilterList.value.any { p -> e.packet.javaClass.simpleName.lowercase().contains(p.lowercase())}) return
 

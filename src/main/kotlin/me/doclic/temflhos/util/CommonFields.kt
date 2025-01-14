@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.eventhandler.EventBus
 
 val mc: Minecraft
     get() = Minecraft.getMinecraft()
-val localPlayer: EntityPlayerSP
+val localPlayer: EntityPlayerSP?
     get() = mc.thePlayer
 val eventBus: EventBus
     get() = MinecraftForge.EVENT_BUS
